@@ -4,6 +4,10 @@ simple program to update ips on your CF zones
 
 should be run periodically (e.g. crontab)
 
+## Build
+
+`go build` shall output ./cloudflare-dynamic-ip-fixer-upper
+
 ## Usage
 
 this program will go through every zone allocated to whatever api token you give it, so generally you should use a scoped token instead of a global one.
@@ -36,5 +40,6 @@ copy .env.example and change values
 `cp .env.example .env`
 
 `CLOUDFLARE_API_TOKEN` is the token you generated earlier
+
 `DOMAINS` is a comma deliminated list of DNS records you want to update
 
