@@ -40,18 +40,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Most API calls require a Context
 	ctx := context.Background()
 
-	// Fetch user details on the account
-	// Fetch all zones available to this user.
 	zones, err := api.ListZones(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
 	for _, z := range zones {
-		fmt.Println(z.Name)
-		fmt.Println(z.ID)
 		records, _, err := api.ListDNSRecords(context.Background(), cloudflare.ZoneIdentifier(z.ID), cloudflare.ListDNSRecordsParams{Type: "A"})
 		if err != nil {
 			fmt.Println(err)
@@ -61,7 +56,6 @@ func main() {
 		for _, r := range records {
 			for _, d := range domains {
 				if r.Name == d {
-					fmt.Printf("%s: %s\n", r.Name, r.Content)
 					if r.Content != string(ip) {
 						fmt.Printf("Updating %s to %s\n", r.Name, string(ip))
 						_, err = api.UpdateDNSRecord(context.Background(), cloudflare.ZoneIdentifier(z.ID), cloudflare.UpdateDNSRecordParams{Type: "A", Name: d, ID: r.ID, Content: string(ip)})
