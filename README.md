@@ -43,3 +43,12 @@ copy .env.example and change values
 
 `DOMAINS` is a comma deliminated list of DNS records you want to update
 
+add this to your crontab
+
+this will run every 30 minutes
+
+`crontab -e`
+
+add this line (replace the directory tho)
+
+`30 * * * * cd /home/phillip/cloudflare-dynamic-ip-fixer-upper && ./cloudflare-dynamic-ip-fixer-upper`
