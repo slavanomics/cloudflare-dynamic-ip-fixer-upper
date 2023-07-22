@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -29,7 +29,10 @@ func main() {
 		panic(err)
 	}
 	defer resp.Body.Close()
-	ip, err := ioutil.ReadAll(resp.Body)
+	if resp.StatusCode != http.StatusOK {
+		panic(resp.Status)
+	}
+	ip, err := io.ReadAll(resp.Body)
 	_ = ip
 	if err != nil {
 		panic(err)
