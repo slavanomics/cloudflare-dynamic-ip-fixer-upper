@@ -1,4 +1,4 @@
-# cloudflare-dynamic-ip-fixer-upper
+![](https://i.imgur.com/bgRpUfQ.gif)
 
 simple program to update ips on your CF zones
 
